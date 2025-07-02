@@ -5,7 +5,7 @@ import SectionContainer from '../components/SectionContainer';
 import { COMPANY_INFO, COLORS } from '../constants';
 import { MailIcon, PhoneIcon, LocationMarkerIcon } from '../components/IconComponents';
 import debtImage from "../assets/images/debt.jpg";
-
+// 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
