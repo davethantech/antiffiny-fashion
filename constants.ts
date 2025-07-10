@@ -25,7 +25,7 @@ export const NAV_ITEMS: NavItem[] = [
 export const COMPANY_INFO = {
 	name: "Cloverdale Finance Company Limited",
 	shortName: "Cloverdale Finance",
-	tagline: "Your Surest Partner for a Wealthier Future",
+	tagline: "Your surest partner to a wealthier future",
 	ceoName: "Abubakar Bello",
 	// email: "abello@cloverdalefinance.com",
 	contactEmail: "info@cloverdalefinance.com",
@@ -34,7 +34,7 @@ export const COMPANY_INFO = {
 		"+234 916 201 5678",
 	],
 	address:
-		"Wing B, second floor, ULO Plaza, No. 34 Sokode Crescent, Wuse Zone 5, Abuja.",
+		"Wing B, 2nd Floor, ULO Plaza, No. 34 Sokode Crescent, Wuse Zone 5, Abuja.",
 	vision:
 		"To become the trusted leader in transformative financial services that actively create a wealthier and secure future for all.",
 	mission:
