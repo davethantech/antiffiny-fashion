@@ -24,11 +24,7 @@ const Footer: React.FC = () => {
 								className='h-10 w-auto'
 							/>
 						</Link>
-						<p className='text-sm text-gray-400 mb-4'>
-							{COMPANY_INFO.tagline} Providing innovative
-							finance solutions to empower individuals and
-							enterprises.
-						</p>
+						
 					</div>
 
 					{/* Column 2: Quick Links */}
