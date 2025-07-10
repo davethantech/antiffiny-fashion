@@ -170,7 +170,7 @@ const ServicesPage: React.FC = () => {
 		<>
 			<PageHeader
 				title='Our Services'
-				subtitle='Cloverdale Finance Company Limited offers a range of Saving, Investment and Credit solutions to aid individuals, households and businesses leverage cashflows and optimize utilization of funds in achieving set objectives.'
+				subtitle='Cloverdale Finance Company Limited provides a range of Savings, Investment, and Credit solutions designed to help individuals, households, and businesses manage their cashflows effectively and achieve their financial goals.'
 				imageSeed='services-banner'
 				image={aboutImage}
 			/>
