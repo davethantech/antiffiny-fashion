@@ -19,7 +19,7 @@ const servicesData: Service[] = [
 		icon: <CurrencyDollarIcon />,
 		title: "Consumer Loans",
 		description:
-			"Cloverdale offers credit facilities that allow clients to leverage their cash flow for big-ticket purchases such as electronics, gadgets, and equipment.",
+			"We offer consumer credit facilities that enable our clients to make essential high-value purchases, including electronics, home appliances, and work-related equipment without disrupting their cashflow.",
 		image: loanImage,
 		details: [
 			{
