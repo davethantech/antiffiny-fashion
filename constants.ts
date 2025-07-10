@@ -26,7 +26,7 @@ export const COMPANY_INFO = {
 	name: "Cloverdale Finance Company Limited",
 	shortName: "Cloverdale Finance",
 	tagline: "Your Surest Partner for a Wealthier Future",
-	ceoName: "Mr. Abubakar Bello",
+	ceoName: "Abubakar Bello",
 	// email: "abello@cloverdalefinance.com",
 	contactEmail: "info@cloverdalefinance.com",
 	phoneNumbers: [
@@ -36,9 +36,9 @@ export const COMPANY_INFO = {
 	address:
 		"Wing B, second floor, ULO Plaza, No. 34 Sokode Crescent, Wuse Zone 5, Abuja.",
 	vision:
-		"To be the trusted global leader in transformative financial services, dedicated to building a wealthier and more secure future for everyone.",
+		"To become the trusted leader in transformative financial services that actively create a wealthier and secure future for all.",
 	mission:
-		"To deliver personalized financial solutions with transparency and innovation, empowering individuals and businesses to achieve lasting prosperity.",
+		"To deliver personalized, transparent, and innovative financial solutions that empower individuals and businesses to achieve lasting prosperity.",
 };
 
 // Wing B, second floor, ULO Plaza, No. 34 Sokode Crescent, Wuse Zone 5, Abuja.
