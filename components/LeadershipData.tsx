@@ -9,7 +9,7 @@ import agnes from "../assets/images/agnes.png";
 
 export const leadershipData: TeamMember[] = [
 	{
-		name: COMPANY_INFO.ceoName,
+		name: "Abubakar Bello",
 		role: "MD/CEO",
 		image: ceoImage,
 		bio: [
