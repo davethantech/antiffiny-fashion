@@ -101,7 +101,8 @@ export const boardMembersData: TeamMember[] = [
 		image: opara,
 		bio: [
 			"Ekenechukwu Njeze is a strategic and solutions-driven professional with interests that span innovative technology, real estate and sustainable development. With a background in Computer Science and Business from the prestigious University College Dublin (Ireland), he brings with him a unique mix of expertise and technical acumen.",
-			"Ekenechukwu’s track record speaks for itself, working in different sectors including pensions, ICT and real estate at establishments such Veritas Glanvills Pensions, Brugge Investments Ltd. He is well experienced and has also developed a solid foundation in business development and technical advisory given the different sectors he has worked in over the years. He is a maestro in bridging operational needs with strategic outcomes.",
+			"Ekenechukwu’s track record speaks for itself, with experience spanning multiple sectors—including pensions, ICT, energy, and real estate. He has worked with reputable organisations such as Veritas Glanvills Pensions; Accelerated Compact Energy Solutions (ACES), where he serves as a board director; and Brugge Investments, where he currently holds the position of MD/CEO.",
+			"He is well experienced and has also developed a solid foundation in business development and technical advisory given the different sectors he has worked in over the years. He is a maestro in bridging operational needs with strategic outcomes.",
 			"Ekenechukwu’s ability to deliver high-impact projects, drive the adoption of digital tools, and close complex deals makes him highly valuable in any business environment.",
 		],
 	},
