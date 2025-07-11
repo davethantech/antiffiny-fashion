@@ -73,11 +73,11 @@ export const leadershipData: TeamMember[] = [
 
 export const boardMembersData: TeamMember[] = [
 	{
-		name: "Dr. Igiekhumeh Nana-Aisha",
+		name: "Dr.Igiekhumeh Nana-Aisha",
 		role: "Board Member",
 		image: micheal,
 		bio: [
-			"Dr. Igiekhumeh Nana-Aisha is a dedicated and results-driven medical professional with a strong foundation in medicine and extensive experience in various clinical settings. She is passionate about delivering exceptional patient care and advocating for positive societal change.",
+			"Dr.Igiekhumeh Nana-Aisha is a dedicated and results-driven medical professional with a strong foundation in medicine and extensive experience in various clinical settings. She is passionate about delivering exceptional patient care and advocating for positive societal change.",
 			"Licensed to practice medicine in Nigeria and the United Kingdom, Dr. Igiekhumeh brings a wealth of experience and expertise to her work. Her skills include:Patient diagnosis and management, Obstetrics ultrasound scan,  Emergency care and first aid, Team management and coordination, Strong communication and interpersonal skills.",
 			"With a Doctor of Medicine degree from Danylo Halytsky Lviv National Medical University, Ukraine, Dr. Igiekhumeh has contributed immensely in service to several reputable hospitals, including Santa Maria Hospital and Abuja Clinics Limited. Beyond her medical pursuits, Dr. Igiekhumeh is passionate about finance and investments, bringing a very unique perspective to our stragegic initiatives.",
 			"In her free time, she engages in baking, reading, photography, and sports."
