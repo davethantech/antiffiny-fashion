@@ -50,18 +50,18 @@ const TeamCard: React.FC<TeamCardProps> = ({
                     When expanded, we let it take its natural height (max-h-full or a very large max-h).
                 */}
 				<div
-					className={`text-sm text-gray-700 text-justify overflow-hidden transition-all duration-500 ease-in-out ${
+					className={`text-sm text-gray-700 text-left overflow-hidden transition-all duration-500 ease-in-out ${
 						isExpanded ? "max-h-full" : "max-h-[80px]" // Use max-h-full for natural height when expanded
 					}`}
 				>
 					{isExpanded ? (
 						member.bio.map((paragraph, idx) => (
-							<p key={idx} className="pr-2 text-justify mb-2 last:mb-0">
+							<p key={idx} className="pr-2 text-left mb-2 last:mb-0">
 								{paragraph}
 							</p>
 						))
 					) : (
-						<p className="pr-2 text-justify">
+						<p className="pr-2 text-left">
 							{member.bio[0].slice(0, 120) +
 								(member.bio[0].length > 120 ? "..." : "")}
 						</p>
