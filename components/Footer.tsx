@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
                                                     {COMPANY_INFO.tagline}
                                                   </p>
                                                 </div>
-					
+                                        </div>   					
 
 					{/* Column 2: Quick Links */}
 					<div>
