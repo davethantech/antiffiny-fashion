@@ -83,12 +83,12 @@ const HomePage: React.FC = () => {
 						<h2
 							className={`text-3xl font-bold text-${COLORS.brandDark} mb-4`}
 						>
-							About Cloverdale Finance
+							About ZZZ Financial Services Finance
 						</h2>
 						<p
 							className={`text-${COLORS.textSecondary} mb-4 leading-relaxed text-justify`}
 						>
-							Cloverdale Finance Company Limited is a Central Bank of Nigeria (CBN)- licensed Finance Company focused on providing innovative financial solutions to empower individual consumers, as well as industrial, commercial, and agricultural enterprises.
+							ZZZ Financial Services Finance Company Limited is a Central Bank of Nigeria (CBN)- licensed Finance Company focused on providing innovative financial solutions to empower individual consumers, as well as industrial, commercial, and agricultural enterprises.
 						</p>
 						<p
 							className={`text-${COLORS.textSecondary} mb-6 leading-relaxed text-justify`}
@@ -105,7 +105,7 @@ const HomePage: React.FC = () => {
 					<div>
 						<img
 							src={moneyImage}
-							alt='About Cloverdale Finance'
+							alt='About ZZZ Financial Services Finance'
 							className='rounded-lg shadow-xl w-full'
 						/>
 					</div>
@@ -179,7 +179,7 @@ const HomePage: React.FC = () => {
 							Ready to achieve your financial goals?
 						</h2>
 						<p className='text-lg text-gray-300 mb-8'>
-							Let Cloverdale Finance be your trusted
+							Let ZZZ Financial Services Finance be your trusted
 							partner. Contact us today for personalized
 							financial solutions.
 						</p>

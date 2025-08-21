@@ -23,8 +23,8 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 export const COMPANY_INFO = {
-	name: "Cloverdale Finance Company Limited",
-	shortName: "Cloverdale Finance",
+	name: "ZZZ Financial Services Finance Company Limited",
+	shortName: "ZZZ Financial Services Finance",
 	tagline: "Your surest partner to a wealthier future",
 	ceoName: "Abubakar Bello",
 	// email: "abello@cloverdalefinance.com",

@@ -22,7 +22,7 @@ const slides = [
 	{
 		title: "Customer Loans",
 		subtitle:
-			"Cloverdale offers credit facilities that allow clients leverage their cashflow for big-ticket purchases.",
+			"ZZZ Financial Services offers credit facilities that allow clients leverage their cashflow for big-ticket purchases.",
 		ctaText: "Explore Our Services",
 		ctaLink: "/services",
 		imageUrl: loanImage,

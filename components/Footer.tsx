@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
 					<div>
 						<div className="flex flex-col items-center md:items-start">
                                                   <Link to='/' className='mb-4'>
-                                                    <img src={logo} alt='Cloverdale Finance Logo' className='h-10 w-auto' />
+                                                    <img src={logo} alt='ZZZ Financial Services Finance Logo' className='h-10 w-auto' />
                                                   </Link>
 
                                                   <p className={`text-sm text-${COLORS.brandAccentGreen} mt-2 text-center md:text-left`}>

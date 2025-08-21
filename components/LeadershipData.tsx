@@ -24,11 +24,11 @@ export const leadershipData: TeamMember[] = [
 		role: "Branch Manager",
 		image: micheal,
 		bio: [
-			"Michael Eduje is the Branch Manager at Cloverdale Financial Services. He brings over 8 years of banking experience and more than 15 years in sales, marketing, and customer relations, with expertise spanning both FMCG and financial services.",
+			"Michael Eduje is the Branch Manager at ZZZ Financial Services Financial Services. He brings over 8 years of banking experience and more than 15 years in sales, marketing, and customer relations, with expertise spanning both FMCG and financial services.",
 			"He is a graduate of Public Administration from the University of Abuja and has undergone several professional trainings in customer service, sales and marketing, customer interactions, and human resource management.",
 			"Throughout his career, Michael has worked with numerous corporate organizations, acquiring a wealth of experience that drives his enthusiasm and self-motivation to achieve set goals.",
 			"He has held a variety of leadership roles including Administrative Officer, Operations Manager, Human Resources Manager, and Team Lead.",
-			"Michael is a passionate team player and a result-oriented achiever committed to elevating Cloverdale to greater heights.",
+			"Michael is a passionate team player and a result-oriented achiever committed to elevating ZZZ Financial Services to greater heights.",
 		],
 	},
 	{
@@ -39,8 +39,8 @@ export const leadershipData: TeamMember[] = [
 			"Winifred is a highly motivated and dedicated individual with strong communication and interpersonal skills.",
 			"She is a graduate of Financial Management Technology from the Federal University of Technology, Owerri, and has received additional training in Human Resources and Health, Safety and Environment (HSE).",
 			"With over 5 years of professional experience, Winifred has worked as a Liaison Officer and Administrative Officer in a reputable corporate organization, gaining valuable skills that enable her to strategically align with organizational goals.",
-			"Currently serving as a Marketing Executive at Cloverdale Finance Company Ltd, she brings energy, strategic thinking, and teamwork to the company's marketing efforts.",
-			"Winifred is a valuable team member committed to driving Cloverdale to greater heights.",
+			"Currently serving as a Marketing Executive at ZZZ Financial Services Finance Company Ltd, she brings energy, strategic thinking, and teamwork to the company's marketing efforts.",
+			"Winifred is a valuable team member committed to driving ZZZ Financial Services to greater heights.",
 		],
 	},
 
@@ -52,8 +52,8 @@ export const leadershipData: TeamMember[] = [
 			"Kotun Simiat is a highly motivated and strategic marketing professional with a bachelor’s degree in Marketing.",
 			"She possesses a solid foundation in program assistance and human resources, effectively bridging the gap between marketing initiatives and organizational goals.",
 			"Kotun is proficient in driving business growth and fostering a positive work culture. Her experience in supporting program implementation and managing HR functions allows her to create meaningful connections within the team and enhance overall productivity.",
-			"As a skilled Marketing Executive at Cloverdale Finance Company, she is known for her strategic approach and innovative mindset.",
-			"She is passionate about leveraging her diverse background to contribute to the success of Cloverdale Finance and remains committed to continuous learning and growth in her marketing career.",
+			"As a skilled Marketing Executive at ZZZ Financial Services Finance Company, she is known for her strategic approach and innovative mindset.",
+			"She is passionate about leveraging her diverse background to contribute to the success of ZZZ Financial Services Finance and remains committed to continuous learning and growth in her marketing career.",
 		],
 	},
 	{
@@ -64,9 +64,9 @@ export const leadershipData: TeamMember[] = [
 			"Ayobukunola is a dedicated and versatile professional with a Bachelor of Science in Social Work and additional qualifications in Product Design and Mental Health.",
 			"With experience in administrative work, she combines her skills to help the organization run smoothly while providing great care to clients.",
 			"She effectively manages various administrative tasks and front desk operations, ensuring seamless communication within the company and a welcoming experience for visitors.",
-			"Ayobukunola also applies her creativity to maintain Cloverdale’s online presence by creating engaging content that resonates with the audience and supports the company’s mission.",
+			"Ayobukunola also applies her creativity to maintain ZZZ Financial Services’s online presence by creating engaging content that resonates with the audience and supports the company’s mission.",
 			"She is passionate about delivering excellence, supporting the company’s vision through effective assistance, fostering a positive work environment, and connecting meaningfully through social media.",
-			"Ayobukunola is a professional in discharging her duties and is deeply committed to ensuring Cloverdale achieves its goals.",
+			"Ayobukunola is a professional in discharging her duties and is deeply committed to ensuring ZZZ Financial Services achieves its goals.",
 		],
 	},
 ];

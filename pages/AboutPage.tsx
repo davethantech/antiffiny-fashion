@@ -12,7 +12,7 @@ const coreValuesData: CoreValue[] = [
   { 
     icon: <CheckCircleIcon className={`w-8 h-8 text-${COLORS.brandGreen}`} />, 
     title: 'Transparency', 
-    description: 'Anchored on the core value of transparency, Cloverdale is a trusted party for achieving financial goals.' 
+    description: 'Anchored on the core value of transparency, ZZZ Financial Services is a trusted party for achieving financial goals.' 
   },
   { 
     icon: <LightBulbIcon className={`w-8 h-8 text-${COLORS.brandGreen}`} />, 
@@ -35,7 +35,7 @@ const AboutPage: React.FC = () => {
   return (
 		<>
 			<PageHeader
-				title='About Cloverdale Finance'
+				title='About ZZZ Financial Services Finance'
 				subtitle='Your surest partner to a wealthier future'
 				imageSeed='corporate-building'
 				image={investmentImage}
@@ -52,7 +52,7 @@ const AboutPage: React.FC = () => {
 						<p
 							className={`text-${COLORS.textSecondary} mb-4 leading-relaxed text-justify`}
 						>
-							Cloverdale Finance Company Limited is a Central Bank of Nigeria (CBN)- licensed Finance Company focused on providing innovative financial solutions to empower individual consumers, as well as industrial, commercial, and agricultural enterprises.
+							ZZZ Financial Services Finance Company Limited is a Central Bank of Nigeria (CBN)- licensed Finance Company focused on providing innovative financial solutions to empower individual consumers, as well as industrial, commercial, and agricultural enterprises.
 						</p>
 						<img
 							src={aboutImage}
@@ -107,7 +107,7 @@ const AboutPage: React.FC = () => {
 							of its target customers.
 						</p>
 						<p className='text-justify'>
-							Cloverdale Finance Company Limited understands
+							ZZZ Financial Services Finance Company Limited understands
 							that Nigeria currently reports low levels of
 							financial inclusion and credit penetration;
 							therefore, the visionary leadership of the

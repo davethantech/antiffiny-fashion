@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
           <Link to='/' className='text-xl md:text-2xl font-bold flex items-center'>
             <img
               src={logo}
-              alt='Cloverdale Logo'
+              alt='ZZZ Financial Services Logo'
               className='h-14 md:h-20 w-auto'
             />
           </Link>
