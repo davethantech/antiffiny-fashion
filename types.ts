@@ -21,15 +21,12 @@ export interface ServiceDetail {
 }
 
 export interface CoreValue {
-  icon: React.ReactNode;
+  image: string;
   title: string;
-  description: string;
-}
+  }
 
-export interface TeamMember {
+export interface Product {
   name: string;
-  role: string;
-  bio: string[];
   image: string;
 }
 

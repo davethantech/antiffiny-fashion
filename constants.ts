@@ -3,35 +3,38 @@ import type { NavItem } from './types';
 
 export const COLORS = {
   brandBlue: 'indigo-700',
-  brandGreen: 'emerald-600',
+//   brandGreen: 'emerald-600',
+  brandGreen: '[#81D8D0]',
   brandAccentGreen: 'lime-500',
   brandDark: 'slate-800',
   textPrimary: 'slate-700',
   textSecondary: 'slate-500',
   bgLight: 'gray-50',
   bgWhite: 'white',
-  footerBg: 'slate-800',
+  footerBg: '[#217280]',
 };
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', path: '/' },
+  { label: 'Our Products', path: '/products' },
   { label: 'About Us', path: '/about' },
-  { label: 'Our Leadership', path: '/leadership' },
-  { label: 'Our Services', path: '/services' },
-  { label: 'Why Trust Us', path: '/why-choose-us' },
   { label: 'Contact Us', path: '/contact' },
+  { label: 'User', path: '/user' },
+  {
+    label: "My Orders",
+    path: "/orders",
+  }
+  
+  
 ];
 
 export const COMPANY_INFO = {
-	name: "ZZZ Financial Services Finance Company Limited",
-	shortName: "ZZZ Financial Services Finance",
+	name: "TIFFANY&CO.",
 	tagline: "Your surest partner to a wealthier future",
 	ceoName: "Abubakar Bello",
-	// email: "abello@cloverdalefinance.com",
-	contactEmail: "info@cloverdalefinance.com",
+	contactEmail: "annie.wang@davethan.tech",
 	phoneNumbers: [
-		"+234 906 202 5678",
-		"+234 916 201 5678",
+		"+44 012 3456 789",
 	],
 	address:
 		"Wing B, 2nd Floor, ULO Plaza, No. 34 Sokode Crescent, Wuse Zone 5, Abuja.",
