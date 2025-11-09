@@ -9,21 +9,43 @@ const CartPage = () => {
       sum + parseFloat(item.price.replace(/[£,]/g, "")) * item.quantity,
     0
   );
+
+  // ✅ 处理 Checkout 按钮点击
   const handleCheckout = async () => {
+    const token = localStorage.getItem("auth_token");
+    const user = localStorage.getItem("user_firstname");
+
+    // 🚫 未登录则跳转登录页
+    if (!token) {
+      alert("Please sign in to proceed to checkout.");
+      window.location.href = "/#/user";
+      return;
+    }
+
     try {
       console.log("🛒 Step 1 - Starting checkout");
       console.log("🛒 Step 2 - Cart content:", cart);
 
+      // ✅ 调用后端接口，携带 token
       const response = await fetch(
         "http://localhost:4242/create-checkout-session",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // ✅ 传入登录 token
+          },
           body: JSON.stringify({ cart }),
         }
       );
 
       console.log("📦 Step 3 - Got response:", response);
+
+      if (!response.ok) {
+        const errData = await response.json();
+        console.error("❌ Server error:", errData);
+        throw new Error(errData.error || "Checkout session creation failed");
+      }
 
       const data = await response.json();
       console.log("💳 Step 4 - Response JSON:", data);
@@ -33,8 +55,8 @@ const CartPage = () => {
         return;
       }
 
-      console.log("🚀 Step 5 - Redirecting to:", data.url);
-      window.location.href = data.url;
+      console.log("🚀 Step 5 - Redirecting to Stripe:", data.url);
+      window.location.href = data.url; // ✅ 跳转 Stripe 页面
     } catch (error) {
       console.error("🔥 Step 6 - Checkout error:", error);
       alert("❌ Checkout failed, please try again.");

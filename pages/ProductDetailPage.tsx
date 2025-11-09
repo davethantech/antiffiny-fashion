@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { PRODUCTS } from "../data/products";
 import { useCart } from "../context/CartContext";
+import { toast } from "react-hot-toast";
 const ProductDetailPage = () => {
   const { id } = useParams<{ id?: string }>();
   const product = PRODUCTS.find((p) => p.id === Number(id));
@@ -45,8 +46,15 @@ const ProductDetailPage = () => {
         <p className="text-xl font-semibold text-gray-800">{product.price}</p>
         <button
           onClick={() => {
+            const token = localStorage.getItem("auth_token");
+            if (!token) {
+              toast.error("Please sign in first to add items to your cart.");
+              window.location.href = "/#/user";
+              return;
+            }
+
             console.log("🛒 addToCart clicked:", product.name);
-            addToCart(product);
+            addToCart(product); // ✅ 已登录，正常添加
           }}
           className="bg-black text-white px-8 py-3 rounded-md hover:bg-[#81D8D0] transition"
         >

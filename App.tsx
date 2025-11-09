@@ -16,6 +16,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import { CartProvider } from "./context/CartContext";
 import OrdersPage from "./pages/OrdersPage";
 import CartPage from "./pages/CartPage";
+import { Navigate } from "react-router-dom";
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
@@ -25,6 +26,12 @@ const ScrollToTop: React.FC = () => {
   }, [pathname]);
 
   return null;
+};
+
+// 简单的登录保护组件
+const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+  const token = localStorage.getItem("auth_token");
+  return token ? children : <Navigate to="/user" replace />;
 };
 
 const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -56,7 +63,16 @@ const App: React.FC = () => {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/user" element={<UserPage />} />
-            <Route path="/orders" element={<OrdersPage />} />
+
+            {/*  未登录时访问 /orders 会自动跳去 /user */}
+            <Route
+              path="/orders"
+              element={
+                <ProtectedRoute>
+                  <OrdersPage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </AppLayout>
       </HashRouter>

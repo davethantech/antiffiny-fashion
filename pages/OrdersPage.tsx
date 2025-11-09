@@ -28,8 +28,33 @@ const OrdersPage: React.FC = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
+      const token = localStorage.getItem("auth_token");
+
+      if (!token) {
+        alert("Please sign in to view your orders.");
+        window.location.href = "/#/user";
+        return;
+      }
+
       try {
-        const response = await fetch("http://localhost:4242/orders");
+        const response = await fetch("http://localhost:4242/orders", {
+          headers: {
+            Authorization: `Bearer ${token}`, // ✅ 带上 JWT token
+          },
+        });
+
+        if (!response.ok) {
+          if (response.status === 401 || response.status === 403) {
+            alert("Session expired. Please sign in again.");
+            localStorage.removeItem("auth_token");
+            localStorage.removeItem("user_firstname");
+            localStorage.removeItem("user_email");
+            window.location.href = "/#/user";
+            return;
+          }
+          throw new Error("Failed to fetch orders");
+        }
+
         const data = await response.json();
         setOrders(data);
       } catch (err) {
@@ -71,9 +96,15 @@ const OrdersPage: React.FC = () => {
 
       <div className="space-y-6">
         {orders.map((order) => {
-          const items: OrderItem[] = Array.isArray(order.items)
-            ? order.items
-            : [];
+          const items: OrderItem[] = (() => {
+            try {
+              return Array.isArray(order.items)
+                ? order.items
+                : JSON.parse(order.items);
+            } catch {
+              return [];
+            }
+          })();
 
           const isExpanded = expandedId === order.id;
 

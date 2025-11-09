@@ -4,7 +4,7 @@ import type { NavItem } from "../types";
 import { COLORS } from "../constants";
 import { MenuIcon, XIcon } from "./IconComponents";
 import logo from "../assets/images/logo.png";
-import { useCart } from "../context/CartContext"; // ✅ 新增导入购物车上下文
+import { useCart } from "../context/CartContext"; // ✅ 购物车上下文
 
 interface NavbarProps {
   navItems: NavItem[];
@@ -13,15 +13,16 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { cart } = useCart(); // ✅ 获取购物车数据
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // ✅ 计算总数量
+  const { cart } = useCart();
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const token = localStorage.getItem("auth_token");
+  const userFirstName = localStorage.getItem("user_firstname");
+
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-    setIsOpen(false); // Close menu on route change
+    setIsOpen(false);
   }, [location.pathname]);
 
   return (
@@ -42,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
             />
           </Link>
 
-          {/* ✅ Desktop Nav */}
+          {/* ✅ Desktop Menu */}
           <div className="hidden lg:flex items-center justify-end min-w-0 space-x-6">
             <div className="flex flex-wrap items-baseline space-x-2 sm:space-x-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300">
               {navItems.map((item) => (
@@ -72,6 +73,36 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
                 </span>
               )}
             </Link>
+
+            {/* ✅ Welcome + Logout */}
+            <div className="flex items-center space-x-3 ml-6">
+              {token ? (
+                <>
+                  <span className="text-sm text-gray-700">
+                    👋 Welcome,&nbsp;
+                    <span className="font-semibold text-[#0d9488]">
+                      {userFirstName || "Guest"}
+                    </span>
+                  </span>
+                  <button
+                    onClick={() => {
+                      localStorage.clear();
+                      window.location.reload();
+                    }}
+                    className="text-sm text-gray-500 hover:text-black"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/user"
+                  className="text-sm text-gray-700 hover:text-[#81D8D0] transition"
+                >
+                  Sign In
+                </Link>
+              )}
+            </div>
           </div>
 
           {/* ✅ Mobile Hamburger */}
@@ -122,7 +153,7 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
                 </Link>
               ))}
 
-              {/* ✅ Mobile 购物车入口 */}
+              {/* ✅ Mobile Cart */}
               <Link
                 to="/cart"
                 className="block w-full px-4 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
@@ -130,6 +161,37 @@ const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
               >
                 🛒 Cart ({totalItems})
               </Link>
+
+              {/* ✅ Mobile Sign in / Welcome */}
+              <div className="pt-2 border-t text-center">
+                {token ? (
+                  <>
+                    <p className="text-sm text-gray-700 mb-2">
+                      👋 Welcome,{" "}
+                      <span className="font-semibold text-[#0d9488]">
+                        {userFirstName}
+                      </span>
+                    </p>
+                    <button
+                      onClick={() => {
+                        localStorage.clear();
+                        window.location.reload();
+                      }}
+                      className="text-sm text-gray-500 hover:text-black"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    to="/user"
+                    onClick={() => setIsOpen(false)}
+                    className="text-sm text-gray-700 hover:text-[#81D8D0]"
+                  >
+                    Sign In
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </>
