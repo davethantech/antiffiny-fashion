@@ -51,8 +51,7 @@ DB_PASSWORD=your_db_password_here
 DB_NAME=tiffany_store
 ```
 
-> Refer to `.env.example` for variable names and formats.  
-> ⚠️ Do **not** upload `.env.local` to GitHub (it is ignored by `.gitignore`).
+> Refer to `.env.example` for variable names and formats.
 
 ---
 
@@ -67,7 +66,7 @@ Expected output:
 
 ```
 [dotenv@17.2.3] injecting env (8) from .env.local
-✅ Server running on http://localhost:4242
+✅ Server running on https://tiffany-fashion-production.up.railway.app/
 ```
 
 ---
@@ -111,7 +110,7 @@ Expected output:
 
 ## 🧠 Notes
 
-- Backend runs on **http://localhost:4242**
+- Backend runs on **https://tiffany-fashion-production.up.railway.app/**
 - Frontend runs on **http://localhost:5173**
 - Keep `.env.local` private — it contains your keys and database credentials.
 - Deploy the production build to your VPS (e.g. **https://fashion.davethan.tech**) once tested locally.

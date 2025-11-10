@@ -35,11 +35,14 @@ const UserPage: React.FC = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:4242/auth/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(signinForm),
-      });
+      const res = await fetch(
+        "https://tiffany-fashion-production.up.railway.app//auth/signin",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(signinForm),
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Sign in failed");
@@ -72,11 +75,14 @@ const UserPage: React.FC = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:4242/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(signupForm),
-      });
+      const res = await fetch(
+        "https://tiffany-fashion-production.up.railway.app//auth/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(signupForm),
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Sign up failed");

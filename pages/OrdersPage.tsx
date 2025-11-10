@@ -37,11 +37,14 @@ const OrdersPage: React.FC = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:4242/orders", {
-          headers: {
-            Authorization: `Bearer ${token}`, // ✅ 带上 JWT token
-          },
-        });
+        const response = await fetch(
+          "https://tiffany-fashion-production.up.railway.app//orders",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // ✅ 带上 JWT token
+            },
+          }
+        );
 
         if (!response.ok) {
           if (response.status === 401 || response.status === 403) {
