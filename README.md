@@ -83,10 +83,10 @@ Expected output:
 
 ```
 VITE v6.4.1  ready in 1848 ms
-➜  Local:   http://localhost:5173/
+➜  Local:   https://tiffany-fashion-annie.vercel.app/
 ```
 
-Then open **http://localhost:5173/** in your browser 🎉
+Then open **https://tiffany-fashion-annie.vercel.app/** in your browser 🎉
 
 ---
 
@@ -111,7 +111,7 @@ Expected output:
 ## 🧠 Notes
 
 - Backend runs on **https://tiffany-fashion-production.up.railway.app/**
-- Frontend runs on **http://localhost:5173**
+- Frontend runs on **https://tiffany-fashion-annie.vercel.app/**
 - Keep `.env.local` private — it contains your keys and database credentials.
 - Deploy the production build to your VPS (e.g. **https://fashion.davethan.tech**) once tested locally.
 
