@@ -33,7 +33,6 @@ const db = mysql.createPool({
   database: process.env.DB_NAME,
 });
 
-// ✅ 初始化数据库结构
 
 db.query(`
   CREATE TABLE IF NOT EXISTS orders (

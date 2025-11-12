@@ -114,7 +114,7 @@ export const PRODUCTS: Product[] = [
     image: "/images/ring2.jpg",
     gallery: [
       "/images/ring2.jpg",
-      "/images/ring2_detail1.jpg",
+      "/images/ring2_detail1.jpg",  
       "/images/ring2_detail2.jpg",
     ],
   },
