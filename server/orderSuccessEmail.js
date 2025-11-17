@@ -1,5 +1,17 @@
 import { FRONTEND_URL } from "./config.js";
 
+function resolveImageUrl(imagePath) {
+  if (!imagePath) return "";
+
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    return imagePath;
+  }
+
+  imagePath = imagePath.replace(/^\.?\/*public\//, "/");
+  imagePath = imagePath.replace(/^\.?\/*/, "/");
+
+  return `${FRONTEND_URL}${imagePath}`;
+}
 
 export function orderSuccessEmailTemplate(order, items) {
   const itemsHtml = items
@@ -7,7 +19,7 @@ export function orderSuccessEmailTemplate(order, items) {
       (item) => `
       <tr>
         <td style="padding: 10px 0; border-bottom: 1px solid #eee;"> 
-          <img src="${item.image.startsWith('http') ? item.image : `${FRONTEND_URL}${item.image}`}"
+          <img src="${resolveImageUrl(item.image)}"
                alt="${item.name}"
                style="width: 90px; height: 90px; border-radius: 8px; object-fit: cover;" />
         </td>
