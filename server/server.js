@@ -19,6 +19,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2022-11-15",
 });
 
+
+// 在所有路由前面
+app.use((req, res, next) => {
+  console.log("📨 Incoming request:", req.method, req.url);
+  next();
+});
+
+
 // ✅ 排除 webhook 的 bodyParser 影响
 app.use((req, res, next) => {
   if (req.originalUrl === "/webhook") {
