@@ -21,17 +21,19 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 
 // ⭐ CORS 放最前面
 const allowedOrigins = [
-  process.env.FRONTEND_URL,                // 主站（生产）
-  "https://tiffany-fashion-annie.vercel.app", // Vercel 域名
-  "http://localhost:5173",                 // 本地开发
+  process.env.FRONTEND_URL,                
+  "https://tiffany-fashion-annie.vercel.app",
+  "http://localhost:5173",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      // ⭐ 修复: OPTIONS 请求 origin 可能是 "null"
+      if (!origin || origin === "null" || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.log("❌ CORS blocked:", origin);
         callback(new Error("Not allowed by CORS: " + origin));
       }
     },
@@ -40,22 +42,9 @@ app.use(
   })
 );
 
+// ⭐ 必须加入 OPTIONS 处理（否则 Railway 会 502）
+app.options("*", cors());
 
-
-// ⭐ 日志输出
-app.use((req, res, next) => {
-  console.log(`📨 ${req.method} ${req.url}`);
-  next();
-});
-
-// ⭐ bodyParser - 但排除 Webhook
-app.use((req, res, next) => {
-  if (req.originalUrl === "/webhook") {
-    next();
-  } else {
-    bodyParser.json()(req, res, next);
-  }
-});
 
 // ⭐ MySQL 连接池
 const db = mysql.createPool({
@@ -480,7 +469,7 @@ app.get("/cron/run-all", async (req, res) => {
   try {
     console.log("⏰ Running ALL CRON TASKS");
 
-    const base = process.env.BACKEND_URL;
+    const base = process.env.CronBACKEND_URL;
 
     // 1️⃣ abandoned notice
     const abandonedRes = await fetch(`${base}/cron/abandoned-orders`);
