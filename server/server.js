@@ -19,31 +19,42 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2022-11-15",
 });
 
-// ⭐ CORS 放最前面
 const allowedOrigins = [
   process.env.FRONTEND_URL,                
   "https://tiffany-fashion-annie.vercel.app",
   "http://localhost:5173",
+  "http://localhost:4242",  // ← 必须加这个
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // ⭐ 修复: OPTIONS 请求 origin 可能是 "null"
-      if (!origin || origin === "null" || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.log("❌ CORS blocked:", origin);
-        callback(new Error("Not allowed by CORS: " + origin));
+      // 后端内部请求 & curl & Postman 都不会有 origin
+      if (!origin) {
+        return callback(null, true);
       }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log("❌ CORS blocked:", origin);
+      return callback(new Error("Not allowed by CORS: " + origin));
     },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
 
+
 // ⭐ 必须加入 OPTIONS 处理（否则 Railway 会 502）
-app.options("*", cors());
+
+// ✅ 使用正则表达式匹配所有路径
+app.options(/(.*)/, cors());
+
+
+// // ⭐ 必须加入 OPTIONS 处理（否则 Railway 会 502）
+// app.options("*", cors());
 
 
 // ⭐ MySQL 连接池
@@ -71,6 +82,109 @@ db.query(`
     INDEX(order_id)
   )
 `);
+
+// ✅ Stripe Webhook
+app.post(
+  "/webhook",
+  bodyParser.raw({ type: "application/json" }),
+  async (req, res) => {
+    const sig = req.headers["stripe-signature"];
+    let event;
+
+    try {
+      event = stripe.webhooks.constructEvent(
+        req.body,
+        sig,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (err) {
+      console.log("❌ Webhook signature error:", err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object;
+
+      // Stripe 付款人邮箱（不再使用作为收件人）
+      const paymentEmail =
+        session.customer_details?.email || "unknown@example.com";
+
+      // 1️⃣ 查询订单
+      db.query(
+        "SELECT * FROM orders WHERE order_id = ?",
+        [session.id],
+        (err, results) => {
+          if (err) {
+            console.error("❌ Failed to load order", err);
+            return;
+          }
+
+          if (results.length === 0) {
+            console.error("❌ Order not found for webhook:", session.id);
+            return;
+          }
+
+          const order = results[0];
+
+          // 🚀 正确的收件人：当前登录用户（不是 Stripe 付款邮箱）
+          const websiteUserEmail = order.user_email;
+
+          let items = [];
+          try {
+            if (Array.isArray(order.items)) {
+              // MySQL JSON 字段通过 mysql2 返回的情况：已经是数组
+              items = order.items;
+            } else if (typeof order.items === "string" && order.items.trim()) {
+              // 老数据 / 某些环境下返回字符串，再做一次 JSON.parse
+              items = JSON.parse(order.items);
+            } else {
+              items = [];
+            }
+          } catch (e) {
+            console.error("❌ items JSON parse error, raw value:", order.items);
+            items = [];
+          }
+
+          // 3️⃣ ⭐ 在这里修复图片路径 ⭐
+          const IMAGE_BASE = process.env.FRONTEND_URL; // 来自 .env.local
+
+          items = items.map((item) => ({
+            ...item,
+            image: item.image.startsWith("http")
+              ? item.image
+              : `${IMAGE_BASE}${item.image}`,
+          }));
+
+          // 3️⃣ 更新订单状态
+          db.query(
+            `UPDATE orders SET status = 'paid', customer_email = ? WHERE order_id = ?`,
+            [paymentEmail, session.id]
+          );
+
+          // 4️⃣ 发送邮件给网站用户，而不是付款人！
+          sendEmail({
+            to: websiteUserEmail,
+            subject: "🧾 Your Antiffiny Fashion Order Confirmation",
+            html: orderSuccessEmailTemplate(order, items),
+          });
+
+          console.log(`💰 Order ${session.id} fully processed`);
+          console.log(`📧 Email sent to website user: ${websiteUserEmail}`);
+        }
+      );
+    }
+
+    res.sendStatus(200);
+  }
+);
+
+
+
+
+
+app.use(express.json());  
+
+
 
 // ------------------------
 // 用户注册
@@ -244,100 +358,8 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-// ✅ Stripe Webhook
-app.post(
-  "/webhook",
-  bodyParser.raw({ type: "application/json" }),
-  async (req, res) => {
-    const sig = req.headers["stripe-signature"];
-    let event;
 
-    try {
-      event = stripe.webhooks.constructEvent(
-        req.body,
-        sig,
-        process.env.STRIPE_WEBHOOK_SECRET
-      );
-    } catch (err) {
-      console.log("❌ Webhook signature error:", err.message);
-      return res.status(400).send(`Webhook Error: ${err.message}`);
-    }
 
-    if (event.type === "checkout.session.completed") {
-      const session = event.data.object;
-
-      // Stripe 付款人邮箱（不再使用作为收件人）
-      const paymentEmail =
-        session.customer_details?.email || "unknown@example.com";
-
-      // 1️⃣ 查询订单
-      db.query(
-        "SELECT * FROM orders WHERE order_id = ?",
-        [session.id],
-        (err, results) => {
-          if (err) {
-            console.error("❌ Failed to load order", err);
-            return;
-          }
-
-          if (results.length === 0) {
-            console.error("❌ Order not found for webhook:", session.id);
-            return;
-          }
-
-          const order = results[0];
-
-          // 🚀 正确的收件人：当前登录用户（不是 Stripe 付款邮箱）
-          const websiteUserEmail = order.user_email;
-
-          let items = [];
-          try {
-            if (Array.isArray(order.items)) {
-              // MySQL JSON 字段通过 mysql2 返回的情况：已经是数组
-              items = order.items;
-            } else if (typeof order.items === "string" && order.items.trim()) {
-              // 老数据 / 某些环境下返回字符串，再做一次 JSON.parse
-              items = JSON.parse(order.items);
-            } else {
-              items = [];
-            }
-          } catch (e) {
-            console.error("❌ items JSON parse error, raw value:", order.items);
-            items = [];
-          }
-
-          // 3️⃣ ⭐ 在这里修复图片路径 ⭐
-          const IMAGE_BASE = process.env.FRONTEND_URL; // 来自 .env.local
-
-          items = items.map((item) => ({
-            ...item,
-            image: item.image.startsWith("http")
-              ? item.image
-              : `${IMAGE_BASE}${item.image}`,
-          }));
-
-          // 3️⃣ 更新订单状态
-          db.query(
-            `UPDATE orders SET status = 'paid', customer_email = ? WHERE order_id = ?`,
-            [paymentEmail, session.id]
-          );
-
-          // 4️⃣ 发送邮件给网站用户，而不是付款人！
-          sendEmail({
-            to: websiteUserEmail,
-            subject: "🧾 Your Antiffiny Fashion Order Confirmation",
-            html: orderSuccessEmailTemplate(order, items),
-          });
-
-          console.log(`💰 Order ${session.id} fully processed`);
-          console.log(`📧 Email sent to website user: ${websiteUserEmail}`);
-        }
-      );
-    }
-
-    res.sendStatus(200);
-  }
-);
 
 // ✅ 获取当前登录用户订单
 app.get("/orders", authenticateToken, (req, res) => {
@@ -357,21 +379,6 @@ app.get("/orders", authenticateToken, (req, res) => {
   );
 });
 
-// 获取当前用户订单
-// ------------------------
-app.get("/orders", authenticateToken, (req, res) => {
-  db.query(
-    "SELECT * FROM orders WHERE user_email = ? ORDER BY created_at DESC LIMIT 100",
-    [req.user.email],
-    (err, results) => {
-      if (err) {
-        console.error("❌ MySQL 查询错误:", err);
-        return res.status(500).json({ error: "Database query failed" });
-      }
-      res.json(results);
-    }
-  );
-});
 
 // ------------------------
 // Home
