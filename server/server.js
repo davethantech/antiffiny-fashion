@@ -20,23 +20,22 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 const allowedOrigins = [
-  process.env.FRONTEND_URL,                
+  process.env.FRONTEND_URL,
   "https://tiffany-fashion-annie.vercel.app",
   "http://localhost:5173",
-  "http://localhost:4242",  // ← 必须加这个
+  "http://localhost:4242",
+  "https://antiffiny-fashion-production2.up.railway.app", // ⭐ railway backend domain
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // 后端内部请求 & curl & Postman 都不会有 origin
-      if (!origin) {
-        return callback(null, true);
-      }
+      if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+
+      // ⭐ allow this backend itself (railway origin)
+      if (origin.includes(".railway.app")) return callback(null, true);
 
       console.log("❌ CORS blocked:", origin);
       return callback(new Error("Not allowed by CORS: " + origin));
