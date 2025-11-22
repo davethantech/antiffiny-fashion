@@ -21,43 +21,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  "https://tiffany-fashion-annie.vercel.app",
-  "http://localhost:5173",
-  "http://localhost:4242",
-  "https://antiffiny-fashion-production2.up.railway.app", // ⭐ railway backend domain
+  "http://localhost:5173"
 ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // allow server-to-server, cron, webhook
-      if (!origin) return callback(null, true);
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
-      // allow exact matches
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-
-      // allow any *.railway.app
-      if (typeof origin === "string" && origin.includes(".railway.app")) {
-        return callback(null, true);
-      }
-
-      console.log("❌ CORS blocked:", origin);
-      return callback(new Error("Not allowed by CORS: " + origin));
-    },
-    credentials: true,
-  })
-);
-
-
-
-// ⭐ 必须加入 OPTIONS 处理（否则 Railway 会 502）
-
-// ✅ 使用正则表达式匹配所有路径
-app.options(/(.*)/, cors());
-
-
-// // ⭐ 必须加入 OPTIONS 处理（否则 Railway 会 502）
-// app.options("*", cors());
+app.use(cors());
 
 
 // ⭐ MySQL 连接池
