@@ -58,6 +58,20 @@ db.query(`
   )
 `);
 
+db.query(`
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(100),
+  last_name VARCHAR(100),
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+`);
+
+
+
+
 // ✅ Stripe Webhook
 app.post(
   "/webhook",
@@ -451,7 +465,7 @@ app.get("/cron/run-all", async (req, res) => {
   try {
     console.log("⏰ Running ALL CRON TASKS");
 
-    const base = process.env.CronBACKEND_URL;
+    const base = process.env.BACKEND_URL;
 
     // 1️⃣ abandoned notice
     const abandonedRes = await fetch(`${base}/cron/abandoned-orders`);
